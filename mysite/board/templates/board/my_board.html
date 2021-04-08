@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}My Board{% endblock %}
+{% block content %}
+<div class="row mt-5">
+  <div class="col-12">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">제목</th>
+          <th scope="col">작성일</th>
+          <th scope="col">최종수정일</th>
+          <th scope="col"><a class="btn btn-danger btn-sm" href="{% url 'board_delete' pk=board.pk %}" style="margin-left: 20px;">Delete</a></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for board in myBoard %}
+        <tr>
+          <th scope="row">{{ board.id }}</th>
+          <td>{{ board.title }} </td>
+          <td>{{ board.created_at }}</td>
+          <td>{{ board.updated_at }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" onclick = "location.href ='/board/new/'">글쓰기</button>
+  </div>
+</div>
+{% endblock %}

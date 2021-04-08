@@ -22,8 +22,9 @@ def signin(request):
         userPassword = request.POST['password']
         user = authenticate(username=userName, password=userPassword)
         if user is not None:
+            request.session['user'] = user.id  # user key에 로그인한 user의 아이디 값
             login(request, user)
-            return redirect('blog')
+            return redirect('/board/')
         else: return HttpResponse('Login failed. Try again.')
     else: # 비어 있는 form으로 반환해야 한다.
         form = LoginForm()
